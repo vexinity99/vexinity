@@ -3,62 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embed External Content</title>
+    <title>Blue Gradient Theme</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', Arial, sans-serif;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            text-align: center;
         }
-        #iframe-container {
+
+        #password-container {
             width: 100%;
-            height: 80vh;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            overflow: hidden;
+            max-width: 400px;
+            padding: 20px;
+            background-color: rgba(50, 50, 50, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        #incorrect-password-container {
+            display: none;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: rgba(50, 50, 50, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        #title, #incorrect-title {
+            font-size: 2rem;
+            background: linear-gradient(90deg, rgb(85, 98, 180), rgb(85, 98, 180), #1e3c72, #1e90ff, #1e3c72, rgb(85, 98, 180)); /* Updated Blue Gradient */
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientText 7s linear infinite;
+        }
+
+        @keyframes gradientText {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        #password-input {
+            padding: 10px;
+            width: 100%;
+            background-color: rgba(70, 70, 70, 0.9);
+            color: #e0e0e0;
+            border: 2px solid #555;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            text-align: center;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        #password-input:focus {
+            border-color: #1e90ff;
+            outline: none;
+        }
+
+        #submit-password, .button {
+            padding: 8px 20px;
+            border: none;
+            background: linear-gradient(90deg, rgb(85, 98, 180), rgb(85, 98, 180), #1e3c72, #1e90ff, #1e3c72, rgb(85, 98, 180)); /* Updated Blue Gradient */
+            background-size: 300% auto;
+            color: white;
+            cursor: pointer;
+            border-radius: 6px;
+            width: 100%;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-position 0.5s ease;
+            animation: gradientButton 7s linear infinite;
+            margin-bottom: 10px;
+            font-family: 'Poppins', Arial, sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes gradientButton {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        #submit-password:hover, .button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        #button-container {
+            display: none;
             margin-top: 20px;
         }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+
+        #games-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+
+        #section-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
-        button:hover {
-            background-color: #0056b3;
+
+        .section {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <button onclick="loadExternalContent()">Load External Content</button>
-    <div id="iframe-container" style="display: none;">
-        <iframe id="external-content" src="" title="External Content"></iframe>
+
+<div id="password-container">
+    <h2 id="title">Loading...</h2>
+    <input type="password" id="password-input" placeholder="Enter your password..." />
+    <button id="submit-password">Submit</button>
+</div>
+
+<div id="incorrect-password-container">
+    <h2 id="incorrect-title">Password Incorrect</h2>
+    <p>Retry in <span id="countdown">5</span> seconds.</p>
+</div>
+
+<div id="button-container">
+    <div id="section-container">
+        <div class="section" id="games-section">
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document27/'">Minecraft</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document4/'">Subway Surfers</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document5/'">Slope</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document7/'">Project Laser</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document8/'">Run 3</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document9/'">Vex 5</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document11/'">Super Mario 64</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document12/'">Flappy Bird</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document13/'">Tiny Fishing</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document14/'">Slow Roads</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document34/'">Snow Riders 3D</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document35/'">Drift Boss</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document15/'">Paper.io</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document16/'">Doge Miner</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document36/'">Basket Random</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document19/'">Bitlife</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document21/'">Google Feud</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document22/'">Sand Physics</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document23/'">Stickman Hook</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document24/'">Tomb Of The Mask</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document25/'">Five Nights At Freddys 4</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document26/'">Save The Doge</button>
+        </div>
+        <div class="section" id="tools-section">
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document28/'">VexAI</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/mainB/'">VexBrowser</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document40/'">VexBrowser (AI + Games)</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document38/'">IFrame Copy</button>
+        </div>
+        <div class="section" id="hacks-section">
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document32/'">Blooket Hacks</button>
+        </div>
+        <div class="section" id="private-section">
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document31/'">List Of Browser Links</button>
+        </div>
     </div>
+    <button class="button" onclick="showSection('games')">Games</button>
+    <button class="button" onclick="showSection('tools')">Tools</button>
+    <button class="button" onclick="showSection('hacks')">Hacks</button>
+    <button class="button" onclick="showSection('private')">Online Private Browsers</button>
+</div>
 
-    <script>
-        function loadExternalContent() {
-            const iframeContainer = document.getElementById('iframe-container');
-            const iframe = document.getElementById('external-content');
+<script>
+    let correctPassword = '';
 
-            // Set the source of the iframe to the external URL
-            iframe.src = 'https://your-other-repository-url.vercel.app'; // Replace with your external URL
+    fetch('https://raw.githubusercontent.com/vexinity99/csshelpassets/refs/heads/main/password.txt')
+        .then(response => response.text())
+        .then(text => {
+            correctPassword = text.trim();
+        });
 
-            // Show the iframe container
-            iframeContainer.style.display = 'block';
+    fetch('https://raw.githubusercontent.com/vexinity99/csshelpassets/refs/heads/main/title.txt')
+        .then(response => response.text())
+        .then(titleText => {
+            document.getElementById('title').innerText = titleText.trim();
+        });
+
+    const passwordInput = document.getElementById('password-input');
+    const submitPasswordButton = document.getElementById('submit-password');
+    const passwordContainer = document.getElementById('password-container');
+    const incorrectPasswordContainer = document.getElementById('incorrect-password-container');
+    const buttonContainer = document.getElementById('button-container');
+    const countdownElement = document.getElementById('countdown');
+
+    submitPasswordButton.addEventListener('click', () => {
+        if (passwordInput.value === correctPassword) {
+            passwordContainer.style.display = 'none';
+            buttonContainer.style.display = 'block';
+        } else {
+            passwordContainer.style.display = 'none';
+            incorrectPasswordContainer.style.display = 'block';
+
+            let countdown = 5;
+            countdownElement.innerText = countdown;
+
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                countdownElement.innerText = countdown;
+
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    incorrectPasswordContainer.style.display = 'none';
+                    passwordContainer.style.display = 'block';
+                }
+            }, 1000);
         }
-    </script>
+    });
+
+    function showSection(section) {
+        document.getElementById('games-section').style.display = section === 'games' ? 'grid' : 'none';
+        document.getElementById('tools-section').style.display = section === 'tools' ? 'block' : 'none';
+        document.getElementById('hacks-section').style.display = section === 'hacks' ? 'block' : 'none';
+        document.getElementById('private-section').style.display = section === 'private' ? 'block' : 'none';
+    }
+</script>
+
 </body>
 </html>
