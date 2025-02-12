@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embed External Content</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #iframe-container {
+            width: 100%;
+            height: 80vh;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="loadExternalContent()">Load External Content</button>
+    <div id="iframe-container" style="display: none;">
+        <iframe id="external-content" src="" title="External Content"></iframe>
+    </div>
+
+    <script>
+        function loadExternalContent() {
+            const iframeContainer = document.getElementById('iframe-container');
+            const iframe = document.getElementById('external-content');
+
+            // Set the source of the iframe to the external URL
+            iframe.src = 'https://your-other-repository-url.vercel.app'; // Replace with your external URL
+
+            // Show the iframe container
+            iframeContainer.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
