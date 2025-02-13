@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFrame</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #121212;
+            color: #e0e0e0;
+            text-align: center;
+        }
+        #container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: rgba(50, 50, 50, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+        }
+        #title {
+            font-size: 2rem;
+            background: linear-gradient(90deg, rgb(85, 98, 180), #1e3c72, #1e90ff, #1e3c72, rgb(85, 98, 180));
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientText 7s linear infinite;
+        }
+        @keyframes gradientText {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .game-mode-button, .hack-button {
+            padding: 8px 20px;
+            border: none;
+            background: linear-gradient(90deg, rgb(85, 98, 180), #1e3c72, #1e90ff, #1e3c72, rgb(85, 98, 180));
+            background-size: 300% auto;
+            color: white;
+            cursor: pointer;
+            border-radius: 6px;
+            width: 100%;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-position 0.5s ease;
+            animation: gradientButton 7s linear infinite;
+            margin-bottom: 10px;
+            font-family: 'Poppins', Arial, sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes gradientButton {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .game-mode-button:hover, .hack-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+        }
+        #hack-buttons {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <h2 id="title">IFrame Code</h2>
+    <button class="game-mode-button" onclick="showHacks('GameMode1')">Copy IFrame Code</button>
+    <div id="hack-buttons">
+        <button class="hack-button" onclick="fetchHackCode('GameMode1')">Copy Code</button>
+    </div>
+</div>
+
+<script>
+function showHacks(gameMode) {
+    document.getElementById('hack-buttons').style.display = 'block';
+    let buttons = document.querySelectorAll('.hack-button');
+    buttons.forEach(button => {
+        button.style.display = 'none';
+    });
+    document.querySelector(`button[onclick="fetchHackCode('${gameMode}')"]`).style.display = 'block';
+}
+
+function fetchHackCode(gameMode) {
+    const rawUrls = {
+        GameMode1: 'https://raw.githubusercontent.com/vexinity99/iframe/refs/heads/main/text',
+    };
+    fetch(rawUrls[gameMode])
+        .then(response => response.text())
+        .then(text => {
+            copyToClipboard(text);
+        })
+        .catch(error => {
+            alert('Failed to fetch the code: ' + error.message);
+        });
+}
+
+function copyToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    alert('Code copied to clipboard!');
+}
+</script>
+</body>
+</html>
